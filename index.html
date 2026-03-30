@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday Lesiba</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Game/digital pixel font -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      border: 10px solid #00ffcc; /* game-style neon border */
+      background: #000;
+      overflow: hidden;
+      font-family: 'Press Start 2P', monospace;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* --- Centered glowing message --- */
+    .message {
+      position: absolute;
+      color: #0ff;
+      font-size: 2rem;
+      text-align: center;
+      z-index: 10;
+      text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+      animation: pulse 1.5s infinite alternate;
+    }
+
+    @keyframes pulse {
+      0% { text-shadow: 0 0 10px #0ff, 0 0 20px #0ff; color: #0ff; }
+      50% { text-shadow: 0 0 20px #ff0, 0 0 40px #ff0; color: #ff0; }
+      100% { text-shadow: 0 0 10px #f0f, 0 0 30px #f0f; color: #f0f; }
+    }
+
+    /* --- Pixel balloons --- */
+    .balloon {
+      position: absolute;
+      bottom: -40px;
+      width: 20px; 
+      height: 20px;
+      opacity: 0.9;
+      animation: floatUp linear infinite;
+    }
+
+    /* --- Floating animation --- */
+    @keyframes floatUp {
+      0% { transform: translateY(0) translateX(0); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(-120vh) translateX(20px); opacity: 0; }
+    }
+
+    /* --- Mobile --- */
+    @media (max-width: 600px) {
+      .message { font-size: 1.3rem; padding: 0 10px; }
+    }
+
+    /* --- PDF button --- */
+    .pdf-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #0ff;
+      color: #000;
+      padding: 10px 15px;
+      font-family: 'Press Start 2P', monospace;
+      text-decoration: none;
+      border-radius: 3px;
+      z-index: 20;
+      box-shadow: 0 0 10px #0ff;
+    }
+    .pdf-button:hover { background: #ff0; box-shadow: 0 0 15px #ff0; }
+  </style>
+</head>
+
+<body>
+
+  <div class="message">🎮 Happy Birthday Lesiba 🎉</div>
+  <a href="lesiba-32.pdf" target="_blank" class="pdf-button">Open Gift</a>
+
+  <script>
+    const numberOfBalloons = 40;
+    const colors = ['#ff0055','#00ffea','#ffcc00','#00ff00','#ff00ff','#00ccff','#ff7700'];
+
+    for (let i = 0; i < numberOfBalloons; i++) {
+      const balloon = document.createElement("div");
+      balloon.className = "balloon";
+
+      // Pixel “block” style using box-shadow
+      const size = 15 + Math.random() * 15; // pixel block size
+      balloon.style.width = size + "px";
+      balloon.style.height = size + "px";
+      balloon.style.background = colors[Math.floor(Math.random() * colors.length)];
+      balloon.style.boxShadow = `0 0 0 ${size/2}px ${colors[Math.floor(Math.random() * colors.length)]}`;
+
+      // Random horizontal position
+      balloon.style.left = Math.random() * 100 + "vw";
+
+      // Random animation duration
+      balloon.style.animationDuration = (5 + Math.random() * 5) + "s";
+
+      // Random animation delay
+      balloon.style.animationDelay = Math.random() * 5 + "s";
+
+      document.body.appendChild(balloon);
+    }
+  </script>
+
+</body>
+</html>
